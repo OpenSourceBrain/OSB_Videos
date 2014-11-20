@@ -1,4 +1,6 @@
-OSB_Videos
+OSB Videos
 ==========
 
-Some ideas for introductory video for OSB website
+Some ideas for introductory videos for the OSB website
+
+In development...
