@@ -17,10 +17,17 @@ width = 1280
 height = 720
 scale_font = 1
 
-font = cv2.FONT_HERSHEY_COMPLEX_SMALL
-font_colour = (10,10,10)
+font = cv2.FONT_ITALIC
+font_colour = (0,0,0)
+font_colour_2 = (0,0,100)
 
 fps = 24
+
+HEADING_1 = "### "
+HEADING_2 = "## "
+HEADING_3 = "# "
+VIDEO = "Video: "
+TEXT = "TEXT"
 
 
 section_screen = "Opening.png"
@@ -55,24 +62,27 @@ def process_args():
                         
     return parser.parse_args()
 
-def process_line(line):
+def parse_line(line):
     
     print(">>> Processing line {%s}"%line)
-    type = 0 
     duration = 2 
     
-    if line.startswith("### "):
-        l0 = line[4:]
-        type = 3
-    elif line.startswith("## "):
-        l0 = line[3:]
-        type = 2
-    elif line.startswith("# "):
-        l0 = line[2:]
-        type = 1
+    if line.startswith(HEADING_1):
+        l0 = line[len(HEADING_1):]
+        type = HEADING_1
+    elif line.startswith(HEADING_2):
+        l0 = line[len(HEADING_2):]
+        type = HEADING_2
+    elif line.startswith(HEADING_3):
+        l0 = line[len(HEADING_3):]
+        type = HEADING_3
+    elif line.startswith(VIDEO):
+        l0 = line[len(VIDEO):]
+        type = VIDEO
     elif len(line.strip())==0:
         return None, -1, -1
     else:
+        type = TEXT
         l0 = line
     
     if '(' in l0:
@@ -85,13 +95,28 @@ def process_line(line):
     return l0, type, duration
         
     
-def process_l1(text, frames, frame_count, args):
+def process_line(text, type, frames, frame_count, args):
     
-    print("Adding %i frames with text: %s"%(frames, text))
+    print("Adding %i frames, type %s with text: %s"%(frames, type, text))
 
     for i in range(frames):
         frame_count +=1
-        img = cv2.imread(section_screen)
+        background = None
+        scale = 1
+        fc = font_colour
+        
+        if type == HEADING_1:
+            background = section_screen
+            scale = 3
+        if type == HEADING_2:
+            background = section_screen
+            scale = 1
+        if type == TEXT:
+            background = section_screen
+            scale = 1
+            fc = font_colour_2
+            
+        img = cv2.imread(background)
 
         show = False
         if show:
@@ -100,15 +125,19 @@ def process_l1(text, frames, frame_count, args):
             cv2.destroyAllWindows()
 
 
-        cv2.putText(img,'Frame: %i'%frame_count,(width-220,50), font, 1,font_colour,scale_font)
+        cv2.putText(img,
+                    'Frame: %i'%frame_count,(width-250,60), 
+                    font, 
+                    scale_font,
+                    font_colour)
 
         cv2.putText(img, 
                     text,
                     (45,150), 
                     font, 
-                    2,
-                    font_colour,
-                    scale_font*2)
+                    scale_font,
+                    fc, 
+                    scale_font)
 
         new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
         cv2.imwrite(new_file,img)
@@ -141,9 +170,9 @@ def main (argv):
         frame_count = 0
         
         for line in script:
-            l0, type, duration = process_line(line)
-            if type == 3:
-                frame_count = process_l1(l0, int(duration*fps), frame_count, args)
+            l0, type, duration = parse_line(line)
+ 
+            frame_count = process_line(l0, type, int(duration*fps), frame_count, args)
 
     
 

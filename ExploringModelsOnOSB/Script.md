@@ -1,9 +1,5 @@
-### Exploring models on Open Source Brain (2 sec)
+### Exploring models on Open Source Brain (1 sec)
 
 Open Source Brain is a ...
 
-### Users (2 sec)
-
-### GitHub repository (2 sec)
-
-### 3D explorer (2 sec)
+### Users (1 sec)
