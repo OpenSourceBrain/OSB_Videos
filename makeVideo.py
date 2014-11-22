@@ -1,5 +1,4 @@
-import cv2
-import cv
+
 '''
 
             STILL IN DEVELOPMENT
@@ -12,6 +11,9 @@ import cv
 
 import argparse
 import sys
+import cv2
+import cv
+import numpy as np
 
 width = 1280
 height = 720
@@ -23,11 +25,12 @@ font_colour_2 = (0,0,100)
 
 fps = 24
 
-HEADING_1 = "### "
+HEADING_1 = "# "
 HEADING_2 = "## "
-HEADING_3 = "# "
+HEADING_3 = "### "
 VIDEO = "Video: "
 TEXT = "TEXT"
+BLANK = "BLANK"
 
 
 section_screen = "Opening.png"
@@ -77,10 +80,10 @@ def parse_line(line):
         l0 = line[len(HEADING_3):]
         type = HEADING_3
     elif line.startswith(VIDEO):
-        l0 = line[len(VIDEO):]
+        l0 = line[len(VIDEO):].strip()
         type = VIDEO
     elif len(line.strip())==0:
-        return None, -1, -1
+        return None, BLANK, -1
     else:
         type = TEXT
         l0 = line
@@ -93,55 +96,101 @@ def parse_line(line):
         l0 = l0[:s]
          
     return l0, type, duration
-        
-    
-def process_line(text, type, frames, frame_count, args):
-    
-    print("Adding %i frames, type %s with text: %s"%(frames, type, text))
 
-    for i in range(frames):
-        frame_count +=1
-        background = None
-        scale = 1
-        fc = font_colour
-        
-        if type == HEADING_1:
-            background = section_screen
-            scale = 3
-        if type == HEADING_2:
-            background = section_screen
-            scale = 1
-        if type == TEXT:
-            background = section_screen
-            scale = 1
-            fc = font_colour_2
-            
-        img = cv2.imread(background)
-
-        show = False
-        if show:
-            cv2.imshow('Image: '+img_file,img)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
-
+def add_overlay(img, frame_count):
 
         cv2.putText(img,
                     'Frame: %i'%frame_count,(width-250,60), 
                     font, 
                     scale_font,
-                    font_colour)
+                    font_colour_2)
+    
+def process_line(text, type, frames, frame_count, args):
+    
+    if type == BLANK:
+        return frame_count
+    
+    
+    if type == VIDEO:
+        
+        video = args.dir+'/'+text
+        print("Adding video from: [%s]"%(video))
+        
+        v = cv2.VideoCapture(video)
+        
+        local_frames = 0
+        while True:
+            success, imgv = v.read()
+            w = np.size(imgv, 1)
+            h = np.size(imgv, 0)
+            
+            print("Frame is %i x %i"%(w,h))
+            
+            if not success or local_frames == frames:
+                print("End of video")
+                break
 
-        cv2.putText(img, 
-                    text,
-                    (45,150), 
-                    font, 
-                    scale_font,
-                    fc, 
-                    scale_font)
+            frame_count +=1
+            local_frames +=1
+            
+            img = cv2.imread(section_screen)
+            
+            img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+            
+            add_overlay(img, frame_count)
+            
+            
+            new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
+            cv2.imwrite(new_file,img)
+            print("Written frame %i to %s (frame %i of %s)"%(frame_count, new_file, local_frames, video))
+        
+        
+    else:
 
-        new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
-        cv2.imwrite(new_file,img)
-        print("Written frame %i to %s"%(frame_count, new_file))
+        print("Adding %i frames, type {%s} with text: {%s}"%(frames, type, text))
+
+        for i in range(frames):
+            frame_count +=1
+            background = None
+            scale = 1
+            fc = font_colour
+
+            if type == HEADING_1:
+                background = section_screen
+                scale = 2
+            if type == HEADING_2:
+                background = section_screen
+                scale = 1
+            if type == HEADING_3:
+                background = section_screen
+                scale = 1
+            if type == TEXT:
+                background = section_screen
+                scale = 1
+                fc = font_colour_2
+
+            img = cv2.imread(background)
+
+            show = False
+            if show:
+                cv2.imshow('Image: '+img_file,img)
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()
+
+
+            add_overlay(img, frame_count)
+
+            cv2.putText(img, 
+                        text,
+                        (45,150), 
+                        font, 
+                        scale_font,
+                        fc, 
+                        scale_font*scale)
+
+            new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
+            cv2.imwrite(new_file,img)
+            print("Written frame %i to %s"%(frame_count, new_file))
 
     return frame_count
 
@@ -214,7 +263,7 @@ def main (argv):
         for img in imgs:
             print("Writing frame %i"%f)
             f+=1
-            out.write(img)
+            print out.write(img)
 
         out.release()
         print("Saved movie file %s"%mov_file)

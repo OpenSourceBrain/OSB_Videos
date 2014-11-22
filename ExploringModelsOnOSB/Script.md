@@ -1,5 +1,12 @@
-### Exploring models on Open Source Brain (1 sec)
+# Exploring models on Open Source Brain (1 sec)
 
-Open Source Brain is a ...
+There are many ways to explore models on OSB...
 
-### Users (1 sec)
+## Projects (1 sec)
+
+Choose a project... (2 sec)
+
+## Users (1 sec)
+
+The users who have worked on this project... (2 sec)
+
