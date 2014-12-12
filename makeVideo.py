@@ -14,6 +14,9 @@ import sys
 import cv2
 import cv
 import numpy as np
+    
+#import svgwrite
+#import cairosvg
 
 width = 1280
 height = 720
@@ -104,6 +107,30 @@ def add_overlay(img, frame_count):
                     font, 
                     scale_font,
                     font_colour_2)
+                    
+def add_text(img, text, location, scale, font_colour):
+    '''
+    temp_file =  text.replace(' ','_')+'.png'
+    dwg = svgwrite.Drawing(temp_file, (200, 200), debug=True)
+    paragraph = dwg.add(dwg.g(font_size=14))
+    paragraph.add(dwg.text(text, (10,20)))
+    dwg.save(temp_file)
+    print("Loading: %s"%temp_file)
+    s_img = cv2.imread(temp_file)
+    print s_img
+    y_offset = location[0]
+    x_offset = location[1]
+    print y_offset
+    print x_offset
+    img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1]] = s_img'''
+    
+    cv2.putText(img, 
+                text,
+                location, 
+                font, 
+                scale_font,
+                font_colour, 
+                scale_font*scale)
     
 def process_line(text, type, frames, frame_count, args):
     
@@ -178,15 +205,9 @@ def process_line(text, type, frames, frame_count, args):
                 cv2.destroyAllWindows()
 
 
-            add_overlay(img, frame_count)
-
-            cv2.putText(img, 
-                        text,
-                        (45,150), 
-                        font, 
-                        scale_font,
-                        fc, 
-                        scale_font*scale)
+            #add_overlay(img, frame_count)
+            
+            add_text(img, text, (45,150), scale, fc)
 
             new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
             cv2.imwrite(new_file,img)
