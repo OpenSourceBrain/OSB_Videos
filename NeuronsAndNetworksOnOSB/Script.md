@@ -1,4 +1,4 @@
-# Models of neurons and networks on OSB (1 sec)
+# Models of neurons and networks on OSB (3 sec)
 
 Open Source Brain is a ...
 
@@ -13,3 +13,11 @@ Video: osb7.mp4
 ## Cerebellar models (1 sec)
 
 ## Granule cells (1 sec)
+
+## Other (1 sec)
+
+Video: osb5.mp4
+
+## Conclusions (2 sec)
+
+Open Source Brain is a ...

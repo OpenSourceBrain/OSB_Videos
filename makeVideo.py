@@ -148,14 +148,16 @@ def process_line(text, type, frames, frame_count, args):
         local_frames = 0
         while True:
             success, imgv = v.read()
+
+            if not success:
+                print("End of video")
+                break
+
             w = np.size(imgv, 1)
             h = np.size(imgv, 0)
             
             print("Frame is %i x %i"%(w,h))
             
-            if not success or local_frames == frames:
-                print("End of video")
-                break
 
             frame_count +=1
             local_frames +=1
