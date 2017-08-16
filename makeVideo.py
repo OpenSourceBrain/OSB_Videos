@@ -14,6 +14,7 @@ import sys
 import cv2
 import cv
 import numpy as np
+from PIL import ImageFont, ImageDraw, Image  
     
 #import svgwrite
 #import cairosvg
@@ -31,6 +32,7 @@ fps = 24
 HEADING_1 = "# "
 HEADING_2 = "## "
 HEADING_3 = "### "
+COMMENT = "//"
 VIDEO = "Video: "
 TEXT = "TEXT"
 BLANK = "BLANK"
@@ -85,6 +87,8 @@ def parse_line(line):
     elif line.startswith(VIDEO):
         l0 = line[len(VIDEO):].strip()
         type = VIDEO
+    elif line.startswith(COMMENT):
+        return None, BLANK, -1
     elif len(line.strip())==0:
         return None, BLANK, -1
     else:
@@ -109,6 +113,8 @@ def add_overlay(img, frame_count):
                     font_colour_2)
                     
 def add_text(img, text, location, scale, font_colour):
+    
+    
     '''
     temp_file =  text.replace(' ','_')+'.png'
     dwg = svgwrite.Drawing(temp_file, (200, 200), debug=True)
@@ -124,13 +130,36 @@ def add_text(img, text, location, scale, font_colour):
     print x_offset
     img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1]] = s_img'''
     
+    '''
     cv2.putText(img, 
                 text,
                 location, 
                 font, 
                 scale_font,
                 font_colour, 
-                scale_font*scale)
+                scale_font*scale)'''
+                
+    #Based on http://www.codesofinterest.com/2017/07/more-fonts-on-opencv.html
+    # Convert the image to RGB (OpenCV uses BGR)  
+    cv2_im_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  
+
+    # Pass the image to PIL  
+    pil_im = Image.fromarray(cv2_im_rgb)  
+
+    draw = ImageDraw.Draw(pil_im)  
+    # use a truetype font  
+    font = ImageFont.truetype("arial.ttf", int(24*scale))
+
+    y_offset = location[0]
+    x_offset = location[1]
+    # Draw the text  
+    draw.text((x_offset, y_offset), text, font=font, fill=(font_colour[2],font_colour[1],font_colour[0],255))  
+
+    # Get back the image to OpenCV  
+    cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)  
+    
+    return cv2_im_processed
+   
     
 def process_line(text, type, frames, frame_count, args):
     
@@ -183,19 +212,26 @@ def process_line(text, type, frames, frame_count, args):
             background = None
             scale = 1
             fc = font_colour
+            
+            sub = None
+            if '-' in text:
+                w = text.split('-')
+                text = w[0].strip()
+                sub = w[1].strip()
+                print("  subheading: %s"%sub)
 
             if type == HEADING_1:
                 background = section_screen
                 scale = 2
             if type == HEADING_2:
                 background = section_screen
-                scale = 1
+                scale = 1.5
             if type == HEADING_3:
                 background = section_screen
-                scale = 1
+                scale = 1.5
             if type == TEXT:
                 background = section_screen
-                scale = 1
+                scale = 1.5
                 fc = font_colour_2
 
             img = cv2.imread(background)
@@ -209,7 +245,10 @@ def process_line(text, type, frames, frame_count, args):
 
             #add_overlay(img, frame_count)
             
-            add_text(img, text, (45,150), scale, fc)
+            img = add_text(img, text, (45,150), scale, fc)
+            if sub:
+                img = add_text(img, sub, (145,250), scale*.7, font_colour_2)
+                
 
             new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
             cv2.imwrite(new_file,img)
