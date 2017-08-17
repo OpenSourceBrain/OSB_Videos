@@ -211,7 +211,8 @@ def process_line(text, type, frames, frame_count, args):
                 global_t = float(frame_count)/fps
                 img = cv2.imread(section_screen)
 
-                img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+                #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+                img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
 
                 #add_overlay(img, frame_count)
 
