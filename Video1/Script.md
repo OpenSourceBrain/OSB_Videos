@@ -15,7 +15,7 @@ Video: osb2a.avi 11-end
 
 Analysis of network connectivity - Synaptic connection locations & projections (5 sec)
 
-Video: osb3.avi
+Video: osb3.avi 0-139
 
 
 //# Exploring projects (1 sec)
