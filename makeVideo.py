@@ -28,6 +28,7 @@ font_colour = (0,0,0)
 font_colour_2 = (0,0,100)
 
 fps = 24
+fps_in = 30
 
 HEADING_1 = "# "
 HEADING_2 = "## "
@@ -169,8 +170,15 @@ def process_line(text, type, frames, frame_count, args):
     
     if type == VIDEO:
         
-        video = args.dir+'/'+text
+        w = text.split()
+        video = args.dir+'/'+w[0]
+        
         print("Adding video from: [%s]"%(video))
+        start_time = 0
+        end_time = 1e12
+        if len(w)>1:
+            start_time = float(w[1].split('-')[0])
+            end_time = 1e12 if w[1].split('-')[1]=='end' else float(w[1].split('-')[1])
         
         v = cv2.VideoCapture(video)
         
@@ -188,51 +196,64 @@ def process_line(text, type, frames, frame_count, args):
             print("Frame is %i x %i"%(w,h))
             
 
-            frame_count +=1
             local_frames +=1
+            local_t = float(local_frames)/fps_in
             
-            img = cv2.imread(section_screen)
-            
-            img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
-            
-            add_overlay(img, frame_count)
-            
-            
-            new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
-            cv2.imwrite(new_file,img)
-            print("Written frame %i to %s (frame %i of %s)"%(frame_count, new_file, local_frames, video))
+            if local_t>start_time and local_t<end_time:
+                
+                frame_count +=1
+
+                global_t = float(frame_count)/fps
+                img = cv2.imread(section_screen)
+
+                img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+
+                #add_overlay(img, frame_count)
+
+
+                new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
+                cv2.imwrite(new_file,img)
+                print("Written frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+            else:
+                print("Skipping video frame %i as it's at video time t=%s sec"%(local_frames, local_t))
+                
         
         
     else:
 
         print("Adding %i frames, type {%s} with text: {%s}"%(frames, type, text))
 
+        sub = None
+        if '-' in text:
+            w = text.split('-')
+            text = w[0].strip()
+            sub = w[1].strip()
+            print("  subheading: %s"%sub)
+
         for i in range(frames):
             frame_count +=1
+            
+            global_t = float(frame_count)/fps
             background = None
             scale = 1
             fc = font_colour
             
-            sub = None
-            if '-' in text:
-                w = text.split('-')
-                text = w[0].strip()
-                sub = w[1].strip()
-                print("  subheading: %s"%sub)
+            scale_big = 2.5
+            scale_mid = 1.7
 
             if type == HEADING_1:
                 background = section_screen
-                scale = 2
+                scale = scale_big
             if type == HEADING_2:
                 background = section_screen
-                scale = 1.5
+                scale = scale_mid
             if type == HEADING_3:
                 background = section_screen
-                scale = 1.5
+                scale = scale_mid
             if type == TEXT:
                 background = section_screen
-                scale = 1.5
-                fc = font_colour_2
+                scale = scale_mid
+                #fc = font_colour_2
 
             img = cv2.imread(background)
 
@@ -241,18 +262,15 @@ def process_line(text, type, frames, frame_count, args):
                 cv2.imshow('Image: '+img_file,img)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
-
-
-            #add_overlay(img, frame_count)
             
             img = add_text(img, text, (45,150), scale, fc)
             if sub:
-                img = add_text(img, sub, (145,250), scale*.7, font_colour_2)
+                img = add_text(img, sub, (145,250), scale_mid, font_colour_2)
                 
 
             new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
             cv2.imwrite(new_file,img)
-            print("Written frame %i to %s"%(frame_count, new_file))
+            print("Written frame %i to %s, t=%s sec"%(frame_count, new_file, global_t))
 
     return frame_count
 
@@ -304,9 +322,9 @@ def main (argv):
             print("Read in %s"%img_file)
             imgs.append(img)
 
-        #format = 'avi'
+        format = 'avi'
         #format = 'mpg'
-        format = 'divx'
+        #format = 'divx'
 
         if format is 'avi':
             fourcc = cv.CV_FOURCC('X','V','I','D')
