@@ -9,10 +9,12 @@ Video: osb2.avi
 
 
 Analysis of cellular properties - 3D morphology & active conductances (5 sec)
+
 Video: osb2a.avi 11-end
 
 
 Analysis of network connectivity - Synaptic connection locations & projections (5 sec)
+
 Video: osb3.avi
 
 

@@ -140,26 +140,31 @@ def add_text(img, text, location, scale, font_colour):
                 font_colour, 
                 scale_font*scale)'''
                 
-    #Based on http://www.codesofinterest.com/2017/07/more-fonts-on-opencv.html
-    # Convert the image to RGB (OpenCV uses BGR)  
-    cv2_im_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  
-
-    # Pass the image to PIL  
-    pil_im = Image.fromarray(cv2_im_rgb)  
-
-    draw = ImageDraw.Draw(pil_im)  
-    # use a truetype font  
-    font = ImageFont.truetype("arial.ttf", int(24*scale))
-
-    y_offset = location[0]
-    x_offset = location[1]
-    # Draw the text  
-    draw.text((x_offset, y_offset), text, font=font, fill=(font_colour[2],font_colour[1],font_colour[0],255))  
-
-    # Get back the image to OpenCV  
-    cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)  
+    lines = text.split('\\n')
     
-    return cv2_im_processed
+    for i in range(len(lines)):
+               
+        
+        #Based on http://www.codesofinterest.com/2017/07/more-fonts-on-opencv.html
+        # Convert the image to RGB (OpenCV uses BGR)  
+        cv2_im_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  
+
+        # Pass the image to PIL  
+        pil_im = Image.fromarray(cv2_im_rgb)  
+
+        draw = ImageDraw.Draw(pil_im)  
+        # use a truetype font  
+        font = ImageFont.truetype("arial.ttf", int(24*scale))
+
+        y_offset = location[0]+i*30*scale
+        x_offset = location[1]
+        # Draw the text  
+        draw.text((x_offset, y_offset), lines[i], font=font, fill=(font_colour[2],font_colour[1],font_colour[0],255))  
+
+        # Get back the image to OpenCV  
+        img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)  
+    
+    return img
    
     
 def process_line(text, type, frames, frame_count, args):
@@ -265,7 +270,7 @@ def process_line(text, type, frames, frame_count, args):
             
             img = add_text(img, text, (45,150), scale, fc)
             if sub:
-                img = add_text(img, sub, (145,250), scale_mid, font_colour_2)
+                img = add_text(img, sub, (145,220), scale_mid, font_colour_2)
                 
 
             new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count

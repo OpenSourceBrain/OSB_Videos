@@ -1,8 +1,24 @@
+set -e
+
+TARGET="Video2"
+
+
+BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
+
+mkdir $BACKUP_DIR
+cp $TARGET/*.avi $BACKUP_DIR
+
 #python makeVideo.py -dir Introduction
 #python makeVideo.py -dir ExploringModelsOnOSB
 #python makeVideo.py -dir NeuronsAndNetworksOnOSB
 
-python makeVideo.py -dir Video1
+#python makeVideo.py -dir Video1
+python makeVideo.py -dir $TARGET
 
-cp Video1/*.avi Video1/*.mp4 ../Dropbox/work/OSB_Videos/src/
-cp *.avi *.mpg *.mp4 ../Dropbox/work/OSB_Videos/
+
+cp $TARGET.avi $BACKUP_DIR
+
+cp $TARGET/*.avi ../Dropbox/work/OSB_Videos/src/$TARGET
+cp $TARGET.avi ../Dropbox/work/OSB_Videos/
+
+echo "Backed up to: "$BACKUP_DIR
