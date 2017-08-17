@@ -27,7 +27,7 @@ font = cv2.FONT_ITALIC
 font_colour = (0,0,0)
 font_colour_2 = (0,0,100)
 
-fps = 24
+fps = 30
 fps_in = 30
 
 HEADING_1 = "# "
