@@ -30,6 +30,10 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
+TRANSITION1 = 3 # e.g. first intro slide
+TRANSITION2 = 2 # internal intro slide
+
+
 HEADING_1 = "# "
 HEADING_2 = "## "
 HEADING_3 = "### "
@@ -97,9 +101,14 @@ def parse_line(line):
         l0 = line
     
     if '(' in l0:
-        s = l0.index('(')
+        s = len(l0) - 1 - l0[::-1].index('(')
         e = l0.index(' sec', s)
-        duration = float(l0[s+1:e])
+        sec_num = l0[s+1:e]
+        if sec_num=='TRANSITION1':
+            sec_num = TRANSITION1
+        if sec_num=='TRANSITION2':
+            sec_num = TRANSITION2
+        duration = float(sec_num)
         
         l0 = l0[:s]
          
