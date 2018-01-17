@@ -13,6 +13,7 @@ import argparse
 import sys
 import cv2
 import cv
+import os
 import numpy as np
 from PIL import ImageFont, ImageDraw, Image  
     
@@ -224,11 +225,13 @@ def process_line(text, type, frames, frame_count, args):
                 img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
 
                 #add_overlay(img, frame_count)
-
-
-                new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
+                frame_dir = args.dir+'/frames/'
+                if not os.path.isdir(frame_dir):
+                    print("Making dir: "+frame_dir)
+                    os.path.mkdir(frame_dir)
+                new_file = frame_dir+args.dir+"_%i.png"%frame_count
                 cv2.imwrite(new_file,img)
-                print("Written frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+                print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
             else:
                 print("Skipping video frame %i as it's at video time t=%s sec"%(local_frames, local_t))
                 
@@ -283,9 +286,13 @@ def process_line(text, type, frames, frame_count, args):
                 img = add_text(img, sub, (145,220), scale_mid, font_colour_2)
                 
 
-            new_file = args.dir+'/frames/'+args.dir+"_%i.png"%frame_count
+            frame_dir = args.dir+'/frames/'
+            if not os.path.isdir(frame_dir):
+                print("Making dir: "+frame_dir)
+                os.mkdir(frame_dir)
+            new_file = frame_dir+args.dir+"_%i.png"%frame_count
             cv2.imwrite(new_file,img)
-            print("Written frame %i to %s, t=%s sec"%(frame_count, new_file, global_t))
+            print("Written the frame %i to %s, t=%s sec"%(frame_count, new_file, global_t))
 
     return frame_count
 
