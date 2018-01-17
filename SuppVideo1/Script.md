@@ -1,9 +1,13 @@
 # Open Source Brain - Supplementary Video 1: Visualising and analysing models (TRANSITION1 sec)
 
-
 Example 1: General interface - Cells from Allen Institute Cell Types Database (TRANSITION2 sec)
 
+// First to main interface???
+// Search for "Allen"
+// 
 Video: all1-2018-01-11_19.12.35.avi 1-10
+Frame: all1-2018-01-11_19.12.35.avi 10 INFO1; The model properties can be explored
+Video: all1-2018-01-11_19.12.35.avi 11-14
 
 
 //Video: osb2.avi

@@ -9,6 +9,7 @@
 
 '''
 
+from __future__ import print_function
 import argparse
 import sys
 import cv2
@@ -33,6 +34,7 @@ fps_in = 30
 
 TRANSITION1 = 3 # e.g. first intro slide
 TRANSITION2 = 2 # internal intro slide
+INFO1 = 2 # internal intro slide
 
 
 HEADING_1 = "# "
@@ -40,6 +42,7 @@ HEADING_2 = "## "
 HEADING_3 = "### "
 COMMENT = "//"
 VIDEO = "Video: "
+FRAME = "Frame: "
 TEXT = "TEXT"
 BLANK = "BLANK"
 
@@ -76,6 +79,19 @@ def process_args():
                         
     return parser.parse_args()
 
+def parse_seconds(sec_num):
+    
+    if sec_num=='TRANSITION1':
+        sec_num = TRANSITION1
+    elif sec_num=='TRANSITION2':
+        sec_num = TRANSITION2
+    elif sec_num=='INFO1':
+        sec_num = INFO1
+    duration = float(sec_num)
+    
+    return duration
+    
+
 def parse_line(line):
     
     print(">>> Processing line {%s}"%line)
@@ -93,6 +109,9 @@ def parse_line(line):
     elif line.startswith(VIDEO):
         l0 = line[len(VIDEO):].strip()
         type = VIDEO
+    elif line.startswith(FRAME):
+        l0 = line[len(FRAME):].strip()
+        type = FRAME
     elif line.startswith(COMMENT):
         return None, BLANK, -1
     elif len(line.strip())==0:
@@ -105,11 +124,7 @@ def parse_line(line):
         s = len(l0) - 1 - l0[::-1].index('(')
         e = l0.index(' sec', s)
         sec_num = l0[s+1:e]
-        if sec_num=='TRANSITION1':
-            sec_num = TRANSITION1
-        if sec_num=='TRANSITION2':
-            sec_num = TRANSITION2
-        duration = float(sec_num)
+        duration = parse_seconds(sec_num)
         
         l0 = l0[:s]
          
@@ -175,6 +190,26 @@ def add_text(img, text, location, scale, font_colour):
         img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)  
     
     return img
+ 
+def add_box(img, top, bottom, outline_colour, fill_colour):
+    
+    #Based on http://www.codesofinterest.com/2017/07/more-fonts-on-opencv.html
+    # Convert the image to RGB (OpenCV uses BGR)  
+    cv2_im_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  
+
+    # Pass the image to PIL  
+    pil_im = Image.fromarray(cv2_im_rgb)  
+
+    draw = ImageDraw.Draw(pil_im)  
+
+    draw.rectangle([(top[0], top[1]), (bottom[0], bottom[1])], \
+              outline=(outline_colour[2],outline_colour[1],outline_colour[0],255), \
+              fill=(fill_colour[2],fill_colour[1],fill_colour[0],255))  
+
+    # Get back the image to OpenCV  
+    img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)  
+    
+    return img
    
     
 def process_line(text, type, frames, frame_count, args):
@@ -183,7 +218,73 @@ def process_line(text, type, frames, frame_count, args):
         return frame_count
     
     
-    if type == VIDEO:
+    if type == FRAME:
+        
+        caption = text.split(';')[1].strip()
+        
+        w = text.split(';')[0].split()
+        video = args.dir+'/'+w[0]
+        
+        frame_timepoint = float(w[1])
+        frame_duration = parse_seconds(w[2])
+        extra_frames = int(frame_duration * fps)
+        print("Adding frame at %s sec from: [%s] & displaying for %s sec (%s frames), with caption: %s..."%(frame_timepoint, video, frame_duration, extra_frames, caption[:25]))
+               
+        v = cv2.VideoCapture(video)
+        
+        local_frames = 0
+        added = False
+        while True:
+            success, imgv = v.read()
+
+            if not success:
+                print("End of video")
+                break
+
+            w = np.size(imgv, 1)
+            h = np.size(imgv, 0)
+            #print("Frame is %i x %i"%(w,h))
+
+            local_frames +=1
+            local_t = float(local_frames)/fps_in
+            
+            if local_t>=frame_timepoint and not added:
+                added = True
+                frame_count +=1
+
+                global_t = float(frame_count)/fps
+                img = cv2.imread(section_screen)
+
+                #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+                img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
+                
+                scale = 1
+                fc = font_colour
+                
+                img = add_box(img, (180,200), (1100,500), (0,0,100), (250,250,250))
+                
+                img = add_text(img, caption, (220,250), scale, font_colour_2)
+
+                #add_overlay(img, frame_count)
+                frame_dir = args.dir+'/frames/'
+                if not os.path.isdir(frame_dir):
+                    print("Making dir: "+frame_dir)
+                    os.path.mkdir(frame_dir)
+                
+                for i in range(extra_frames):
+                    new_file = frame_dir+args.dir+"_%i.png"%frame_count
+                    cv2.imwrite(new_file,img)
+                    print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+                    
+                    local_frames +=1
+                    frame_count +=1
+                    global_t = float(frame_count)/fps
+            else:
+                pass
+                #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
+                
+    
+    elif type == VIDEO:
         
         w = text.split()
         video = args.dir+'/'+w[0]
@@ -208,9 +309,8 @@ def process_line(text, type, frames, frame_count, args):
             w = np.size(imgv, 1)
             h = np.size(imgv, 0)
             
-            print("Frame is %i x %i"%(w,h))
+            #print("Frame is %i x %i"%(w,h))
             
-
             local_frames +=1
             local_t = float(local_frames)/fps_in
             
@@ -233,10 +333,9 @@ def process_line(text, type, frames, frame_count, args):
                 cv2.imwrite(new_file,img)
                 print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
             else:
-                print("Skipping video frame %i as it's at video time t=%s sec"%(local_frames, local_t))
+                pass
+                #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
                 
-        
-        
     else:
 
         print("Adding %i frames, type {%s} with text: {%s}"%(frames, type, text))
@@ -365,13 +464,13 @@ def main (argv):
         for img in imgs:
             print("Writing frame %i"%f)
             f+=1
-            print out.write(img)
+            print(out.write(img))
 
         out.release()
         print("Saved movie file %s"%mov_file)
 
 
-    print "Done!"
+    print("Done!")
 
 
 
