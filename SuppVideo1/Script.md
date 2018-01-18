@@ -6,9 +6,9 @@ Example 1: General interface - Cells from Allen Institute Cell Types Database (T
 // First to main interface???
 // Search for "Allen"
 // 
-//Video: all1-2018-01-11_19.12.35.avi 1-10
-//Frame: all1-2018-01-11_19.12.35.avi 10 INFO1; The model properties can be explored
-//Video: all1-2018-01-11_19.12.35.avi 11-14
+Video: all-2018-01-18_15.47.29.avi 24-31
+Frame: all-2018-01-18_15.47.29.avi 31 INFO1; Background color can be changed
+Video: all-2018-01-18_15.47.29.avi 31-45
 
 
 /// ~20sec
@@ -21,12 +21,16 @@ Example 2: 3D cell morphology & active conductances - Layer 5 Pyramidal cell fro
 Video: bbp4-2018-01-18_14.39.14.avi 1-10
 Frame: bbp4-2018-01-18_14.39.14.avi 10 INFO1; Soma, dendrites & axon can be highlighted
 Video: bbp4-2018-01-18_14.39.14.avi 10-22
-Frame: bbp4-2018-01-18_14.39.14.avi 10 INFO1; Regions on cell with active conductances\n(red - high | yellow - low | white - none)
-Video: bbp4-2018-01-18_14.39.14.avi 22-25&28-34&39-43&50-60
+Frame: bbp4-2018-01-18_14.39.14.avi 22 INFO1; Regions on cell with active conductances\n(red - high | yellow - low | white - none)
+Video: bbp4-2018-01-18_14.39.14.avi 22-25&28-34&39-43&50-56.5
 
 
 /// ~20sec
 Example 3: Ion channel properties - Cerebellar Golgi cell (Vervaeke et al. 2010) (TRANSITION2 sec)
+
+Video: verv1-2018-01-18_15.27.04.avi 0-10
+Frame: verv1-2018-01-18_15.27.04.avi 10 INFO1; Channel activation/inactivation variables can be plotted
+Video: verv1-2018-01-18_15.33.59.avi 0-2&9-12&14-21&25-27&32-39
 
 /// ~20sec
 Example 4: Network analysis - Thalamocortical network model (Traub et al. 2005) (TRANSITION2 sec)
