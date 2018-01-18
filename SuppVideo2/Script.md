@@ -5,10 +5,12 @@ Example 1: Simulation management - Hodgkin Huxley single compartment model (TRAN
 //   From project page
 //   Persist project
 //   Press play
+//   **TODO**
 //   Show voltage rec option
 //   Show experiment tab
 //   Show green
 //   Replay experiment
+
 
 Example 2: Tutorials - Hodgkin Huxley tutorial\nhttp://www.opensourcebrain.org/tutorials (TRANSITION2 sec)
 

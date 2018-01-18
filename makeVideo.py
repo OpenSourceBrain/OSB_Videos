@@ -32,9 +32,9 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
-TRANSITION1 = 3 # e.g. first intro slide
-TRANSITION2 = 2 # internal intro slide
-INFO1 = 2 # internal intro slide
+TRANSITION1 = 1 # e.g. first intro slide
+TRANSITION2 = 1 # internal intro slide
+INFO1 = 1 # internal intro slide
 
 
 HEADING_1 = "# "
@@ -120,14 +120,15 @@ def parse_line(line):
         type = TEXT
         l0 = line
     
-    if '(' in l0:
-        s = len(l0) - 1 - l0[::-1].index('(')
-        e = l0.index(' sec', s)
-        sec_num = l0[s+1:e]
-        duration = parse_seconds(sec_num)
-        
-        l0 = l0[:s]
-         
+    if type != FRAME:
+        if '(' in l0:
+            s = len(l0) - 1 - l0[::-1].index('(')
+            e = l0.index(' sec', s)
+            sec_num = l0[s+1:e]
+            duration = parse_seconds(sec_num)
+
+            l0 = l0[:s]
+
     return l0, type, duration
 
 def add_overlay(img, frame_count):
@@ -261,9 +262,9 @@ def process_line(text, type, frames, frame_count, args):
                 scale = 1
                 fc = font_colour
                 
-                img = add_box(img, (180,200), (1100,500), (0,0,100), (250,250,250))
+                img = add_box(img, (180,500), (1100,700), (0,0,100), (250,250,250))
                 
-                img = add_text(img, caption, (220,250), scale, font_colour_2)
+                img = add_text(img, caption, (520,250), scale, font_colour_2)
 
                 #add_overlay(img, frame_count)
                 frame_dir = args.dir+'/frames/'
@@ -290,11 +291,14 @@ def process_line(text, type, frames, frame_count, args):
         video = args.dir+'/'+w[0]
         
         print("Adding video from: [%s]"%(video))
-        start_time = 0
-        end_time = 1e12
+        start_times = [0]
+        end_times = [1e12]
         if len(w)>1:
-            start_time = float(w[1].split('-')[0])
-            end_time = 1e12 if w[1].split('-')[1]=='end' else float(w[1].split('-')[1])
+            start_times = []
+            end_times = []
+            for b in w[1].split('&'):
+                start_times.append(float(b.split('-')[0]))
+                end_times.append(1e12 if b.split('-')[1]=='end' else float(b.split('-')[1]))
         
         v = cv2.VideoCapture(video)
         
@@ -314,27 +318,31 @@ def process_line(text, type, frames, frame_count, args):
             local_frames +=1
             local_t = float(local_frames)/fps_in
             
-            if local_t>start_time and local_t<end_time:
+            for i in range(len(start_times)):
+                start_time = start_times[i]
+                end_time = end_times[i]
                 
-                frame_count +=1
+                if local_t>start_time and local_t<end_time:
 
-                global_t = float(frame_count)/fps
-                img = cv2.imread(section_screen)
+                    frame_count +=1
 
-                #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
-                img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
+                    global_t = float(frame_count)/fps
+                    img = cv2.imread(section_screen)
 
-                #add_overlay(img, frame_count)
-                frame_dir = args.dir+'/frames/'
-                if not os.path.isdir(frame_dir):
-                    print("Making dir: "+frame_dir)
-                    os.path.mkdir(frame_dir)
-                new_file = frame_dir+args.dir+"_%i.png"%frame_count
-                cv2.imwrite(new_file,img)
-                print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
-            else:
-                pass
-                #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
+                    #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+                    img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
+
+                    #add_overlay(img, frame_count)
+                    frame_dir = args.dir+'/frames/'
+                    if not os.path.isdir(frame_dir):
+                        print("Making dir: "+frame_dir)
+                        os.path.mkdir(frame_dir)
+                    new_file = frame_dir+args.dir+"_%i.png"%frame_count
+                    cv2.imwrite(new_file,img)
+                    print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+                else:
+                    pass
+                    #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
                 
     else:
 

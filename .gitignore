@@ -1,5 +1,6 @@
 *~
 *.mpg
+*.mov
 *.avi
 */frames/*.png
 *.svg
