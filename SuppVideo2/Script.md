@@ -25,7 +25,7 @@ Example 2: Network analysis - Cortical microcolumn model (Potjans and Diesmann 2
 // try click on cell
 
 Video: potj-2018-01-22_14.00.19.avi 0-7&28-32&36-52&64-67
-Frame: potj-2018-01-22_14.00.19.avi 68 INFO1; Clicking on cell shows connections to/from it
+Frame: potj-2018-01-22_14.00.19.avi 68 INFO1; Clicking on a cell shows connections to/from it
 Video: potj-2018-01-22_14.00.19.avi 68-81
 
 

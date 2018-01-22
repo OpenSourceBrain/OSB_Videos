@@ -35,8 +35,8 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
-TRANSITION1 = 3 # e.g. first intro slide
-TRANSITION2 = 2 # internal intro slide
+TRANSITION1 = 2.3 # e.g. first intro slide
+TRANSITION2 = 2.2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
 INFO2 = 2.5 # internal intro slide
 
