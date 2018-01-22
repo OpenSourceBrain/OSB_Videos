@@ -1,4 +1,4 @@
-# Open Source Brain - Supplementary Video 2: Executing, replaying\nand managing simulations (TRANSITION1 sec)
+# Open Source Brain - Supplementary Video 3: Executing, replaying\nand managing simulations (TRANSITION1 sec)
 
 Example 1: Simulation management - Hodgkin Huxley single compartment model (TRANSITION2 sec)
 
