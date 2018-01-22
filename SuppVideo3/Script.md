@@ -44,6 +44,12 @@ Example 4: Network model - Olfactory bulb cells, Migliore et al. (2014) (TRANSIT
 //  INFO: all segments have been recorded
 //  Replay - zoom in
 
+Frame: olf-2018-01-22_18.17.30.avi 0 INFO1; Membrane potential has been recorded in all neuron segments
+Video: olf-2018-01-22_18.17.30.avi 0-24
+Frame: olf-2018-01-22_18.17.30.avi 68 INFO1; Can also be replayed at slower rate
+Video: olf-2018-01-22_18.17.30.avi 68-82
+
+
 Example 5: Network model - Layer 2/3 network\nReduced version of Traub et al. (2005) (TRANSITION2 sec)
 
 //  Straight to net
