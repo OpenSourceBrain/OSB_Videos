@@ -42,6 +42,10 @@ Example 4: Network analysis - Thalamocortical network model (Traub et al. 2005) 
 // show matrix
 // convert to force dir
 
+Video: thal-2018-01-22_11.13.10.avi 0-5&8-50&57-61&97-102
+Frame: thal-2018-01-22_11.13.10.avi 115 INFO1; Force directed graph eventually minimizes distance between cells
+Video: thal-2018-01-22_11.13.10.avi 115-119
+
 /// ~20sec
 Example 5: Network analysis - Cortical microcolumn model (Potjans and Diesmann 2014) (TRANSITION2 sec)
 

@@ -22,7 +22,7 @@ Example 2: Tutorials - Hodgkin Huxley tutorial\nhttp://www.opensourcebrain.org/t
 //  From http://www.opensourcebrain.org/tutorials
 //  Tutorial
 //  First step of tut
-//  Reload iclamp
+//  Reload vclamp
 
 Example 3: Detailed cell model - Layer 2/3 Pyramidal cell, Smith et al. (2013) (TRANSITION2 sec)
 
