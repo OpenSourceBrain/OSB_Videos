@@ -23,6 +23,9 @@ from PIL import ImageFont, ImageDraw, Image
 
 width = 1280
 height = 720
+width = 640
+height = 360
+
 scale_font = 1
 
 font = cv2.FONT_ITALIC
@@ -46,6 +49,7 @@ FRAME = "Frame: "
 TEXT = "TEXT"
 BLANK = "BLANK"
 
+interpolation = cv2.INTER_AREA
 
 section_screen = "Opening.png"
 
@@ -254,17 +258,18 @@ def process_line(text, type, frames, frame_count, args):
                 frame_count +=1
 
                 global_t = float(frame_count)/fps
-                img = cv2.imread(section_screen)
+                #img = cv2.imread(section_screen)
 
-                #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
-                img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
                 
                 scale = 1
                 fc = font_colour
                 
-                img = add_box(img, (180,500), (1100,700), (0,0,100), (250,250,250))
+                img = add_box(imgv, (180,500), (1100,700), (0,0,100), (250,250,250))
                 
                 img = add_text(img, caption, (520,250), scale, font_colour_2)
+                
+                #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+                img = cv2.resize(img,(width, height), interpolation = interpolation)
 
                 #add_overlay(img, frame_count)
                 frame_dir = args.dir+'/frames/'
@@ -330,7 +335,7 @@ def process_line(text, type, frames, frame_count, args):
                     img = cv2.imread(section_screen)
 
                     #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
-                    img = cv2.resize(imgv,(width, height), interpolation = cv2.INTER_CUBIC)
+                    img = cv2.resize(imgv,(width, height), interpolation = interpolation)
 
                     #add_overlay(img, frame_count)
                     frame_dir = args.dir+'/frames/'
@@ -392,6 +397,8 @@ def process_line(text, type, frames, frame_count, args):
             if sub:
                 img = add_text(img, sub, (145,220), scale_mid, font_colour_2)
                 
+            #img[:(min(h,height)), :(min(w,width))] = imgv[:(min(h,height)), :(min(w,width))]
+            img = cv2.resize(img,(width, height), interpolation = interpolation)
 
             frame_dir = args.dir+'/frames/'
             if not os.path.isdir(frame_dir):
