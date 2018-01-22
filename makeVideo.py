@@ -38,6 +38,7 @@ fps_in = 30
 TRANSITION1 = 3 # e.g. first intro slide
 TRANSITION2 = 2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
+INFO2 = 2.5 # internal intro slide
 
 
 HEADING_1 = "# "
@@ -91,6 +92,8 @@ def parse_seconds(sec_num):
         sec_num = TRANSITION2
     elif sec_num=='INFO1':
         sec_num = INFO1
+    elif sec_num=='INFO2':
+        sec_num = INFO2
     duration = float(sec_num)
     
     return duration
@@ -450,13 +453,6 @@ def main (argv):
             new_file = args.dir+'/frames/'+args.dir+"_%i.png"%i
             img_files_post.append(new_file)
 
-        imgs = []
-
-        for i in range(len(img_files_post)):
-            img_file = img_files_post[i]
-            img = cv2.imread(img_file)
-            print("Read in %s"%img_file)
-            imgs.append(img)
 
         format = 'avi'
         #format = 'mpg'
@@ -476,9 +472,12 @@ def main (argv):
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
 
         f = 0
-        for img in imgs:
-            print("Writing frame %i"%f)
+        for i in range(len(img_files_post)):
+            img_file = img_files_post[i]
+            img = cv2.imread(img_file)
+            print("Read in %s"%img_file)
             f+=1
+            print("Writing frame %i"%f)
             out.write(img)
 
         out.release()

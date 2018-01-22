@@ -38,5 +38,8 @@ Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 201X) (TRANS
 // deselect pyr cells
 // zoom in on interneurons
 
+Video: bez-2018-01-22_15.25.59.avi 0-24
+Frame: bez-2018-01-22_15.25.59.avi 24 INFO2; Control panel can be used to interact with objects\ne.g. hide all pyramidal cells (population "poolosyn")
+Video: bez-2018-01-22_15.25.59.avi 24-45
 
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)
