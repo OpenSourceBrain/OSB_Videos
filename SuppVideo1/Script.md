@@ -8,7 +8,7 @@ Example 1: General interface - Cells from Allen Institute Cell Types Database (T
 // 
 Video: all-2018-01-18_15.47.29.avi 24-31
 Frame: all-2018-01-18_15.47.29.avi 31 INFO1; Background color can be changed
-Video: all-2018-01-18_15.47.29.avi 31-45
+Video: all-2018-01-18_15.47.29.avi 31-39
 
 
 /// ~20sec
@@ -35,11 +35,28 @@ Video: verv1-2018-01-18_15.33.59.avi 0-2&9-12&14-21&25-27&32-39
 /// ~20sec
 Example 4: Network analysis - Thalamocortical network model (Traub et al. 2005) (TRANSITION2 sec)
 
+// Show full net - rotate
+// select one cell?
+// deselect
+// press conn widget
+// show matrix
+// convert to force dir
+
 /// ~20sec
 Example 5: Network analysis - Cortical microcolumn model (Potjans and Diesmann 2014) (TRANSITION2 sec)
+
+// Show full net - rotate
+// show chord diag..
+// seect projections between cells
+// try click on cell
 
 /// ~20sec
 Example 6: Network analysis - Hippocampal CA1 model (Bezaire et al. 201X) (TRANSITION2 sec)
 
+// Show full net - rotate
+// Show force dir graph
+// show control panel
+// deselect pyr cells
+// zoom in on interneurons
 
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)
