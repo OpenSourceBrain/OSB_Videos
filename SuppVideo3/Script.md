@@ -56,4 +56,7 @@ Example 5: Network model - Layer 2/3 network\nReduced version of Traub et al. (2
 //  INFO: all segments have Ca2+ recorded
 //  Replay
 
+Frame: caconc-2018-01-22_19.03.40.avi 2 INFO1; [Ca2+] has been recorded in all neuron segments
+Video: caconc-2018-01-22_19.03.40.avi 2-29
+
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)
