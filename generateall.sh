@@ -1,12 +1,13 @@
 set -e
 
-TARGET="SuppVideo1"
+TARGET="SuppVideo2"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
 
 mkdir $BACKUP_DIR
 cp $TARGET/*.avi $BACKUP_DIR
+mv $TARGET/frames/*png /tmp
 
 #python makeVideo.py -dir Introduction
 #python makeVideo.py -dir ExploringModelsOnOSB

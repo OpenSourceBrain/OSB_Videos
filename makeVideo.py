@@ -32,8 +32,8 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
-TRANSITION1 = 3 # e.g. first intro slide
-TRANSITION2 = 2 # internal intro slide
+TRANSITION1 = 1 # e.g. first intro slide
+TRANSITION2 = 1 # internal intro slide
 INFO1 = 1 # internal intro slide
 
 
@@ -94,7 +94,7 @@ def parse_seconds(sec_num):
 
 def parse_line(line):
     
-    print(">>> Processing line {%s}"%line)
+    print(">>> Processing line {%s}"%line.strip())
     duration = 2 
     
     if line.startswith(HEADING_1):
@@ -275,7 +275,7 @@ def process_line(text, type, frames, frame_count, args):
                 for i in range(extra_frames):
                     new_file = frame_dir+args.dir+"_%i.png"%frame_count
                     cv2.imwrite(new_file,img)
-                    print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+                    print("Written frame %i to %s (frame %i of %s; local t=%s sec; global t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
                     
                     local_frames +=1
                     frame_count +=1
@@ -339,14 +339,14 @@ def process_line(text, type, frames, frame_count, args):
                         os.path.mkdir(frame_dir)
                     new_file = frame_dir+args.dir+"_%i.png"%frame_count
                     cv2.imwrite(new_file,img)
-                    print("Written the frame %i to %s (frame %i of %s; vid t=%s sec; t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
+                    print("Written frame %i to %s (frame %i of %s; local t=%s sec; global t=%s sec)"%(frame_count, new_file, local_frames, video,local_t, global_t))
                 else:
                     pass
                     #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
                 
     else:
 
-        print("Adding %i frames, type {%s} with text: {%s}"%(frames, type, text))
+        print("Adding %i frames, type %s with text: {%s}"%(frames, type, text))
 
         sub = None
         if '-' in text:
@@ -472,7 +472,7 @@ def main (argv):
         for img in imgs:
             print("Writing frame %i"%f)
             f+=1
-            print(out.write(img))
+            out.write(img)
 
         out.release()
         print("Saved movie file %s"%mov_file)

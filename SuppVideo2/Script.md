@@ -3,13 +3,18 @@
 Example 1: Simulation management - Hodgkin Huxley single compartment model (TRANSITION2 sec)
 
 //   From project page
+//   Show model desc
 //   Persist project
-//   Press play
-//   **TODO**
-//   Show voltage rec option
+//   Press Run
 //   Show experiment tab
 //   Show green
-//   Replay experiment
+//   Reload experiment
+//   show sim time
+//   show on cell
+Video: hh-2018-01-22_10.32.44.avi 0-6&13-19
+
+Frame: hh-2018-01-22_10.32.44.avi 19 INFO1; Registered, logged in users can "persist" projects to run simulations
+Video: hh-2018-01-22_10.32.44.avi 19-56&60-97
 
 
 Example 2: Tutorials - Hodgkin Huxley tutorial\nhttp://www.opensourcebrain.org/tutorials (TRANSITION2 sec)
