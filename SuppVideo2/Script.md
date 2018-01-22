@@ -24,6 +24,10 @@ Example 2: Network analysis - Cortical microcolumn model (Potjans and Diesmann 2
 // seect projections between cells
 // try click on cell
 
+Video: potj-2018-01-22_14.00.19.avi 0-7&28-32&36-52&64-67
+Frame: potj-2018-01-22_14.00.19.avi 68 INFO1; Clicking on cell shows connections to/from it
+Video: potj-2018-01-22_14.00.19.avi 68-81
+
 
 /// ~20sec
 Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 201X) (TRANSITION2 sec)
