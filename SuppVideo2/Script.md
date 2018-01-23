@@ -1,4 +1,4 @@
-# Open Source Brain - Supplementary Video 2: Visualising and analysing\nnetwork models (TRANSITION1 sec)
+# Open Source Brain - Supplementary Video 2: Visualizing and analysing\nnetwork models (TRANSITION1 sec)
 
 
 /// ~20sec
@@ -12,7 +12,7 @@ Example 1: Network analysis - Thalamocortical network model (Traub et al. 2005) 
 // convert to force dir
 
 Video: thal-2018-01-22_11.13.10.avi 0-5&8-50&57-61&97-102
-Frame: thal-2018-01-22_11.13.10.avi 115 INFO1; Force directed graph eventually minimizes distance between cells
+Frame: thal-2018-01-22_11.13.10.avi 115 INFO1; Force directed graph eventually minimizes distance\nbetween strongly connected cells
 Video: thal-2018-01-22_11.13.10.avi 115-119
 
 
@@ -30,7 +30,7 @@ Video: potj-2018-01-22_14.00.19.avi 68-81
 
 
 /// ~20sec
-Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 201X) (TRANSITION2 sec)
+Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 2016) (TRANSITION2 sec)
 
 // Show full net - rotate
 // Show force dir graph

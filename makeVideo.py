@@ -23,8 +23,10 @@ from PIL import ImageFont, ImageDraw, Image
 
 width = 1280
 height = 720
+suffix='_HD'
 width = 640
 height = 360
+suffix=''
 
 scale_font = 1
 
@@ -267,7 +269,7 @@ def process_line(text, type, frames, frame_count, args):
                 scale = 1
                 fc = font_colour
                 
-                img = add_box(imgv, (180,500), (1100,700), (0,0,100), (250,250,250))
+                img = add_box(imgv, (180,500), (1100,650), (0,0,100), (250,250,250))
                 
                 img = add_text(img, caption, (520,250), scale, font_colour_2)
                 
@@ -460,15 +462,15 @@ def main (argv):
 
         if format is 'avi':
             fourcc = cv.CV_FOURCC('X','V','I','D')
-            mov_file = args.dir+'.avi'
+            mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
         if format is 'divx':
             fourcc = cv.CV_FOURCC('D','I','V','X')
-            mov_file = args.dir+'.avi'
+            mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
         if format is 'mpg':
             fourcc = cv.CV_FOURCC('M','J','P','G')
-            mov_file = args.dir+'.mpg'
+            mov_file = args.dir+suffix+'.mpg'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
 
         f = 0
@@ -477,7 +479,7 @@ def main (argv):
             img = cv2.imread(img_file)
             print("Read in %s"%img_file)
             f+=1
-            print("Writing frame %i"%f)
+            print("Writing frame %i/%i"%(f,len(img_files_post)))
             out.write(img)
 
         out.release()

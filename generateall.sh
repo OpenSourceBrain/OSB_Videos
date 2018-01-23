@@ -1,6 +1,6 @@
 set -e
 
-TARGET="SuppVideo3"
+TARGET="SuppVideo1"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
@@ -20,6 +20,6 @@ python makeVideo.py -dir $TARGET
 cp $TARGET.avi $BACKUP_DIR
 
 cp $TARGET/*.avi ../Dropbox/work/OSB_Videos/src/$TARGET
-cp $TARGET.avi ../Dropbox/work/OSB_Videos/
+cp $TARGET*.avi ../Dropbox/work/OSB_Videos/
 
 echo "Backed up to: "$BACKUP_DIR

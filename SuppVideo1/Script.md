@@ -1,4 +1,4 @@
-# Open Source Brain - Supplementary Video 1: Visualising cell models (TRANSITION1 sec)
+# Open Source Brain - Supplementary Video 1: Visualizing cell models (TRANSITION1 sec)
 
 /// ~20sec
 Example 1: General interface - Cells from Allen Institute Cell Types Database (TRANSITION2 sec)
@@ -15,14 +15,17 @@ Video: all-2018-01-18_15.47.29.avi 31-39
 Example 2: 3D cell morphology & active conductances - Layer 5 Pyramidal cell from Blue Brain Project (TRANSITION2 sec)
 
 // show cell on own
+// network.setGeometryType('cylinders',1)
 // Go to model desc
 // Highlight na
 // Highlight i apical
-Video: bbp4-2018-01-18_14.39.14.avi 1-10
-Frame: bbp4-2018-01-18_14.39.14.avi 10 INFO1; Soma, dendrites & axon can be highlighted
-Video: bbp4-2018-01-18_14.39.14.avi 10-22
-Frame: bbp4-2018-01-18_14.39.14.avi 22 INFO1; Regions on cell with active conductances\n(red - high | yellow - low | white - none)
-Video: bbp4-2018-01-18_14.39.14.avi 22-25&28-34&39-43&50-56.5
+Video: bbp-2018-01-23_17.08.44.avi 1-19
+Frame: bbp-2018-01-23_17.08.44.avi 19 INFO1; Soma, dendrites & axon can be highlighted
+Video: bbp-2018-01-23_17.08.44.avi 24-34
+Frame: bbp-2018-01-23_17.08.44.avi 34 INFO1; Highlighting regions on cell with active conductances\nred - high | yellow - low | white - none
+Video: bbp-2018-01-23_17.08.44.avi 37-46&50-53
+Frame: bbp-2018-01-23_17.08.44.avi 53 INFO1; Non-uniform conductance: Ih
+Video: bbp-2018-01-23_17.08.44.avi 57-71
 
 
 /// ~20sec

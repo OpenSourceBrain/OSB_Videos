@@ -24,6 +24,13 @@ Example 2: Tutorials - Hodgkin Huxley tutorial\nhttp://www.opensourcebrain.org/t
 //  First step of tut
 //  Reload vclamp
 
+Frame: tut-2018-01-23_10.31.34.avi 31.5 INFO1; Interactively run guided current clamp experiments
+Video: tut-2018-01-23_10.31.34.avi 31.5-48
+Frame: tut-2018-01-23_10.31.34.avi 48 INFO1; Results of completed experiments are automatically reloaded
+Video: tut-2018-01-23_10.31.34.avi 48-64
+Frame: tut-2018-01-23_10.31.34.avi 64 INFO1; Voltage clamp experiments are also included
+Video: tut-2018-01-23_10.31.34.avi 64-95
+
 Example 3: Detailed cell model - Layer 2/3 Pyramidal cell, Smith et al. (2013) (TRANSITION2 sec)
 
 //  Straight to 3d cell
