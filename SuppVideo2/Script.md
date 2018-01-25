@@ -41,7 +41,7 @@ Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 2016) (TRANS
 Video: bez-2018-01-22_15.25.59.avi 0-24
 Frame: bez-2018-01-22_15.25.59.avi 24 INFO2; Control panel can be used to interact with objects\ne.g. hide all pyramidal cells (population "poolosyn")
 Video: bez-2018-01-22_15.25.59.avi 24-45
-Frame: bez-2018-01-25_10.38.27.avi 2 INFO2; Force directed graph shows high interconnectivity of\npyramidal cells
-Video: bez-2018-01-25_10.38.27.avi 2-15
+Frame: bez-2018-01-25_10.38.27.avi 0 INFO2; Force directed graph shows high interconnectivity of\npyramidal cells
+Video: bez-2018-01-25_10.38.27.avi 0-15
 
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)
