@@ -11,9 +11,9 @@ Example 1: Network analysis - Thalamocortical network model (Traub et al. 2005) 
 // show matrix
 // convert to force dir
 
-Video: thal-2018-01-22_11.13.10.avi 0-5&8-50&57-61&97-102
-Frame: thal-2018-01-22_11.13.10.avi 115 INFO1; Force directed graph eventually minimizes distance\nbetween strongly connected cells
-Video: thal-2018-01-22_11.13.10.avi 115-119
+Video: thal-2018-01-22_11.13.10.avi 0-5&8-32
+Frame: thal-2018-01-22_11.13.10.avi 32 INFO1; Adjacency matrix is interactive - hovering shows\ninformation on populations & connections
+Video: thal-2018-01-22_11.13.10.avi 32-48
 
 
 /// ~20sec
@@ -21,7 +21,7 @@ Example 2: Network analysis - Cortical microcolumn model (Potjans and Diesmann 2
 
 // Show full net - rotate
 // show chord diag..
-// seect projections between cells
+// select projections between cells
 // try click on cell
 
 Video: potj-2018-01-22_14.00.19.avi 0-7&28-32&36-52&64-67
@@ -41,5 +41,7 @@ Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 2016) (TRANS
 Video: bez-2018-01-22_15.25.59.avi 0-24
 Frame: bez-2018-01-22_15.25.59.avi 24 INFO2; Control panel can be used to interact with objects\ne.g. hide all pyramidal cells (population "poolosyn")
 Video: bez-2018-01-22_15.25.59.avi 24-45
+Frame: bez-2018-01-25_10.38.27.avi 2 INFO2; Force directed graph shows high interconnectivity of\npyramidal cells
+Video: bez-2018-01-25_10.38.27.avi 2-15
 
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)
