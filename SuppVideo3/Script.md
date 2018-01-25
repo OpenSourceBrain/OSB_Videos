@@ -14,7 +14,7 @@ Example 1: Simulation management - Hodgkin Huxley single compartment model (TRAN
 
 Video: hh-2018-01-22_10.32.44.avi 0-6&13-19
 Frame: hh-2018-01-22_10.32.44.avi 19 INFO1; Registered, logged in users can "persist" projects to run simulations
-Video: hh-2018-01-22_10.32.44.avi 19-56&60-97
+Video: hh-2018-01-22_10.32.44.avi 19-56&60-74
 
 
 Example 2: Tutorials - Hodgkin Huxley tutorial\nhttp://www.opensourcebrain.org/tutorials (TRANSITION2 sec)
