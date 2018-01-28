@@ -24,9 +24,9 @@ from PIL import ImageFont, ImageDraw, Image
 width = 1280
 height = 720
 suffix='_HD'
-width = 640
-height = 360
-suffix=''
+#width = 640
+#height = 360
+#suffix=''
 
 scale_font = 1
 
@@ -37,7 +37,7 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
-TRANSITION1 = 2.3 # e.g. first intro slide
+TRANSITION1 = 4 # e.g. first intro slide
 TRANSITION2 = 2.2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
 INFO2 = 2.5 # internal intro slide

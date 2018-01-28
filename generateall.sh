@@ -1,6 +1,6 @@
 set -e
 
-TARGET="SuppVideo3"
+TARGET="cVideo3"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
