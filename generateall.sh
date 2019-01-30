@@ -1,6 +1,9 @@
 set -e
 
-TARGET="cVideo3"
+#conda activate CV2
+
+
+TARGET="test"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
@@ -17,7 +20,7 @@ rm -f $TARGET/frames/*.png
 python makeVideo.py -dir $TARGET
 
 
-cp $TARGET.avi $BACKUP_DIR
+#cp $TARGET.avi $BACKUP_DIR
 
 cp $TARGET/*.avi ../Dropbox/work/OSB_Videos/src/$TARGET
 cp $TARGET*.avi ../Dropbox/work/OSB_Videos/

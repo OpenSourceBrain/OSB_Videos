@@ -13,7 +13,6 @@ from __future__ import print_function
 import argparse
 import sys
 import cv2
-import cv
 import os
 import numpy as np
 from PIL import ImageFont, ImageDraw, Image  
@@ -37,7 +36,7 @@ font_colour_2 = (0,0,100)
 fps = 30
 fps_in = 30
 
-TRANSITION1 = 4 # e.g. first intro slide
+TRANSITION1 = 1 # e.g. first intro slide
 TRANSITION2 = 2.2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
 INFO2 = 2.5 # internal intro slide
@@ -248,7 +247,7 @@ def process_line(text, type, frames, frame_count, args):
             success, imgv = v.read()
 
             if not success:
-                print("End of video")
+                print("End of the video")
                 break
 
             w = np.size(imgv, 1)
@@ -293,14 +292,15 @@ def process_line(text, type, frames, frame_count, args):
             else:
                 pass
                 #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
-                
+          
+        ##v.release()
     
     elif type == VIDEO:
         
         w = text.split()
         video = args.dir+'/'+w[0]
         
-        print("Adding video from: [%s]"%(video))
+        print("Adding a video from: [%s] with opencv %s"%(video, cv2.__version__))
         start_times = [0]
         end_times = [1e12]
         if len(w)>1:
@@ -311,19 +311,23 @@ def process_line(text, type, frames, frame_count, args):
                 end_times.append(1e12 if b.split('-')[1]=='end' else float(b.split('-')[1]))
         
         v = cv2.VideoCapture(video)
+        ##v.open(video)
+        
+        print("Successfully opened %s?: %s"%(video,v.isOpened()))
+        print("Starts: %s, ends: %s"%(start_times, end_times))
         
         local_frames = 0
         while True:
             success, imgv = v.read()
-
+            print('Read...')
             if not success:
-                print("End of video")
+                print("End of de video - successful read: %s, open still: %s, local_frames=%s"%(success,v.isOpened(),local_frames))
                 break
 
             w = np.size(imgv, 1)
             h = np.size(imgv, 0)
             
-            #print("Frame is %i x %i"%(w,h))
+            print("Frame is %i x %i"%(w,h))
             
             local_frames +=1
             local_t = float(local_frames)/fps_in
@@ -353,6 +357,8 @@ def process_line(text, type, frames, frame_count, args):
                 else:
                     pass
                     #print("Skipping frame %i at time %s sec; "%(local_frames, local_t),end="")
+                    
+        ##v.release()
                 
     else:
 
@@ -461,7 +467,7 @@ def main (argv):
         #format = 'divx'
 
         if format is 'avi':
-            fourcc = cv.CV_FOURCC('X','V','I','D')
+            fourcc = cv2.VideoWriter_fourcc(*'XVID')
             mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
         if format is 'divx':
