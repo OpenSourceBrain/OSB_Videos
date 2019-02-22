@@ -11,9 +11,17 @@ Example 1: Network analysis - Thalamocortical network model (Traub et al. 2005) 
 // show matrix
 // convert to force dir
 
-Video: thal-2018-01-22_11.13.10.avi 0-5&8-32
-Frame: thal-2018-01-22_11.13.10.avi 32 INFO1; Adjacency matrix is interactive - hovering shows\ninformation on populations & connections
-Video: thal-2018-01-22_11.13.10.avi 32-48
+Video: thal2-2019-02-22_13.05.00.avi 0-15
+Frame: thal2-2019-02-22_13.05.00.avi 15 INFO1; Multiple options are present for analysing connectivity
+Video: thal2-2019-02-22_13.05.00.avi 15-28
+Frame: thal2-2019-02-22_13.05.00.avi 28 INFO1; Adjacency matrix is interactive - hovering shows\ninformation on populations & connections
+Video: thal2-2019-02-22_13.05.00.avi 28-35
+Frame: thal2-2019-02-22_13.05.00.avi 35 INFO1; Weights of connections can be shown
+Video: thal2-2019-02-22_13.25.08.avi 2-10
+Frame: thal2-2019-02-22_13.25.08.avi 10 INFO1; Connectivity can be shown at population level
+Video: thal2-2019-02-22_13.25.08.avi 10-18
+Frame: thal2-2019-02-22_13.25.08.avi 18 INFO1; Excitatory (red) & inhibitory (blue) connections 
+Video: thal2-2019-02-22_13.25.08.avi 18-31
 
 
 /// ~20sec
@@ -38,10 +46,10 @@ Example 3: Network analysis - Hippocampal CA1 model (Bezaire et al. 2016) (TRANS
 // deselect pyr cells
 // zoom in on interneurons
 
-Video: bez-2018-01-22_15.25.59.avi 0-24
-Frame: bez-2018-01-22_15.25.59.avi 24 INFO2; Control panel can be used to interact with objects\ne.g. hide all pyramidal cells (population "poolosyn")
-Video: bez-2018-01-22_15.25.59.avi 24-45
-Frame: bez-2018-01-25_10.38.27.avi 0 INFO2; Force directed graph shows high interconnectivity of\npyramidal cells
-Video: bez-2018-01-25_10.38.27.avi 0-15
+Video: bez2-2019-02-22_10.06.16.avi 0-26
+Frame: bez2-2019-02-22_10.06.16.avi 34 INFO3; Control panel can be used to interact with objects\ne.g. hide all blue pyramidal cells (population "poolosyn"),\nand only show interneurons
+Video: bez2-2019-02-22_10.06.16.avi 34-53
+Frame: bez2-2019-02-22_10.06.16.avi 65 INFO2; Population connectivity graph shows high interconnectivity of\npyramidal cells
+Video: bez2-2019-02-22_10.06.16.avi 65-90
 
 # Open Source Brain - All models available at http://www.opensourcebrain.org (TRANSITION1 sec)

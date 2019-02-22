@@ -7,6 +7,9 @@ cap = cv2.VideoCapture(video)
         
 print("Successfully opened %s?: %s"%(video,cap.isOpened()))
 
+from PIL import ImageFont, ImageDraw, Image  
+font = ImageFont.truetype("arial.ttf", int(24*1))
+
 local_frames = 0
 ret = True
 while(ret):

@@ -40,6 +40,7 @@ TRANSITION1 = 1 # e.g. first intro slide
 TRANSITION2 = 2.2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
 INFO2 = 2.5 # internal intro slide
+INFO3 = 3.5 # internal intro slide
 
 
 HEADING_1 = "# "
@@ -95,6 +96,8 @@ def parse_seconds(sec_num):
         sec_num = INFO1
     elif sec_num=='INFO2':
         sec_num = INFO2
+    elif sec_num=='INFO3':
+        sec_num = INFO3
     duration = float(sec_num)
     
     return duration
@@ -301,6 +304,9 @@ def process_line(text, type, frames, frame_count, args):
         video = args.dir+'/'+w[0]
         
         print("Adding a video from: [%s] with opencv %s"%(video, cv2.__version__))
+        if not os.path.isfile(video):
+            print('Video file %s not found!!'%video)
+            exit()
         start_times = [0]
         end_times = [1e12]
         if len(w)>1:
