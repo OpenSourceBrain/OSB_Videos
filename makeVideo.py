@@ -20,12 +20,16 @@ from PIL import ImageFont, ImageDraw, Image
 #import svgwrite
 #import cairosvg
 
-width = 1280
-height = 720
-suffix='_HD'
-#width = 640
-#height = 360
-#suffix=''
+hd = False
+
+if hd:
+    width = 1280
+    height = 720
+    suffix='_HD'
+else:
+    width = 640
+    height = 360
+    suffix=''
 
 scale_font = 1
 
