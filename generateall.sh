@@ -5,14 +5,15 @@ set -e
 
 TARGET="test"
 TARGET="SuppVideo1"
-TARGET="SuppVideo3"
 TARGET="SuppVideo2"
+TARGET="SuppVideo3"
+TARGET="Promo"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
 
 mkdir $BACKUP_DIR
-cp $TARGET/*.avi $BACKUP_DIR
+cp $TARGET/*.avi $TARGET/*.mov $BACKUP_DIR 2>/dev/null || :
 rm -f $TARGET/frames/*.png
 
 #python makeVideo.py -dir Introduction
@@ -25,7 +26,7 @@ python makeVideo.py -dir $TARGET
 
 #cp $TARGET.avi $BACKUP_DIR
 
-cp $TARGET/*.avi ../Dropbox/work/OSB_Videos/src/$TARGET
-cp $TARGET*.avi ../Dropbox/work/OSB_Videos/
+cp $TARGET/*.mov ../Dropbox/work/OSB_Videos/src/$TARGET
+cp $TARGET*.mov ../Dropbox/work/OSB_Videos/
 
 echo "Backed up to: "$BACKUP_DIR

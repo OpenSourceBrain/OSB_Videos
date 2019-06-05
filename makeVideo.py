@@ -20,7 +20,7 @@ from PIL import ImageFont, ImageDraw, Image
 #import svgwrite
 #import cairosvg
 
-hd = False
+hd = True
 
 if hd:
     width = 1280
@@ -59,6 +59,7 @@ BLANK = "BLANK"
 interpolation = cv2.INTER_AREA
 
 section_screen = "Opening.png"
+section_screen = "Opening2.png"
 
 
 def process_args():
@@ -475,18 +476,49 @@ def main (argv):
         format = 'avi'
         #format = 'mpg'
         #format = 'divx'
+        format = 'mov'
+        format = 'mpg'
+        format = 'mp4h'
 
         if format is 'avi':
             fourcc = cv2.VideoWriter_fourcc(*'XVID')
             mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
         if format is 'divx':
-            fourcc = cv.CV_FOURCC('D','I','V','X')
+            #fourcc = cv.CV_FOURCC('D','I','V','X')
+            fourcc = cv2.VideoWriter_fourcc(*'DIVX')
             mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
+        if format is 'mov':
+            #fourcc = cv.CV_FOURCC('D','I','V','X')
+            fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
+            mov_file = args.dir+suffix+'.mov'
+            out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
         if format is 'mpg':
-            fourcc = cv.CV_FOURCC('M','J','P','G')
+            #fourcc = cv.CV_FOURCC('M','J','P','G')
+            #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+            fourcc = cv2.VideoWriter_fourcc('m', 'j', 'p', 'g') # note the lower case
             mov_file = args.dir+suffix+'.mpg'
+            out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
+            
+        if format is 'mp4h':
+            #fourcc = cv.CV_FOURCC('M','J','P','G')
+            #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+            
+            fourcc = cv2.VideoWriter_fourcc(*'H264')
+            #fourcc = cv2.VideoWriter_fourcc('m', 'j', 'p', 'g') # note the lower case
+            mov_file = args.dir+suffix+'.mp4'
+            out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
+            print('vvvvvvv')
+            print(fourcc)
+            
+        if format is 'mp4':
+            #fourcc = cv.CV_FOURCC('M','J','P','G')
+            #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+            
+            fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+            #fourcc = cv2.VideoWriter_fourcc('m', 'j', 'p', 'g') # note the lower case
+            mov_file = args.dir+suffix+'.mp4'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
 
         f = 0
@@ -502,7 +534,7 @@ def main (argv):
         print("Saved movie file %s"%mov_file)
 
 
-    print("Done!")
+    print("Done with %s!"%sys.version)
 
 
 
