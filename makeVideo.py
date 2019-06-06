@@ -20,12 +20,17 @@ from PIL import ImageFont, ImageDraw, Image
 #import svgwrite
 #import cairosvg
 
-hd = True
+hd = False
+hdhalf = True
 
 if hd:
     width = 1280
     height = 720
     suffix='_HD'
+elif hdhalf:
+    width = 960
+    height = 540
+    suffix='_HDh'
 else:
     width = 640
     height = 360
@@ -531,8 +536,9 @@ def main (argv):
             out.write(img)
 
         out.release()
-        print("Saved movie file %s"%mov_file)
+        global_t = float(frame_count)/fps
 
+        print("*************************************************\n    Saved movie file %s, total length: %s seconds\n*************************************************"%(mov_file,global_t))
 
     print("Done with %s!"%sys.version)
 
