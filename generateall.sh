@@ -26,7 +26,8 @@ python makeVideo.py -dir $TARGET
 
 #cp $TARGET.avi $BACKUP_DIR
 
-cp $TARGET/*.mov ../Dropbox/work/OSB_Videos/src/$TARGET
-cp $TARGET*.mov ../Dropbox/work/OSB_Videos/
+cp $TARGET/*.mov ../Dropbox/work/OSB_Videos/src/$TARGET 2>/dev/null || :
+cp $TARGET*.mov ../Dropbox/work/OSB_Videos/ 2>/dev/null || :
+cp $TARGET*.mp4 ../Dropbox/work/OSB_Videos/ 2>/dev/null || :
 
 echo "Backed up to: "$BACKUP_DIR

@@ -20,8 +20,10 @@ from PIL import ImageFont, ImageDraw, Image
 #import svgwrite
 #import cairosvg
 
+#
 hd = False
 hdhalf = True
+hd = True
 
 if hd:
     width = 1280

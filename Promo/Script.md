@@ -3,7 +3,7 @@
 
 Video: ../SuppVideo1/all-2018-01-18_15.47.29.avi 1-5
 
-Video: ../SuppVideo1/bbp-2018-01-23_17.08.44.avi 37-44
+Video: ../SuppVideo1/bbp-2018-01-23_17.08.44.avi 39-44
 
 
 Video: ../SuppVideo2/potj-2018-01-22_14.00.19.avi 41-50
