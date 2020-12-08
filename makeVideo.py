@@ -26,6 +26,8 @@ hdhalf = True
 hd = True
 
 if hd:
+    width = 1578
+    height = 794
     width = 1280
     height = 720
     suffix='_HD'
@@ -345,7 +347,7 @@ def process_line(text, type, frames, frame_count, args):
             w = np.size(imgv, 1)
             h = np.size(imgv, 0)
             
-            print("Frame is %i x %i"%(w,h))
+            print("Frame %s is %i x %i"%(local_frames,w,h))
             
             local_frames +=1
             local_t = float(local_frames)/fps_in
@@ -480,12 +482,12 @@ def main (argv):
             img_files_post.append(new_file)
 
 
-        format = 'avi'
         #format = 'mpg'
         #format = 'divx'
         format = 'mov'
         format = 'mpg'
         format = 'mp4h'
+        #format = 'avi'
 
         if format is 'avi':
             fourcc = cv2.VideoWriter_fourcc(*'XVID')

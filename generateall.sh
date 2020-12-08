@@ -9,6 +9,12 @@ TARGET="SuppVideo2"
 TARGET="SuppVideo3"
 TARGET="Promo"
 
+TARGET="cVideo2"
+TARGET="c302Full"
+TARGET="c302FW"
+TARGET="c302Sibernetic"
+TARGET="NWBE"
+
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
 
