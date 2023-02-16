@@ -207,7 +207,8 @@ def add_text(img, text, location, scale, font_colour):
 
         draw = ImageDraw.Draw(pil_im)  
         # use a truetype font  
-        font = ImageFont.truetype("arial.ttf", int(24*scale))
+        #font = ImageFont.truetype("arial.ttf", int(24*scale))
+        font = ImageFont.truetype("Arial Unicode.ttf", 15)
 
         y_offset = location[0]+i*30*scale
         x_offset = location[1]
@@ -491,28 +492,28 @@ def main (argv):
         format = 'mp4h'
         #format = 'avi'
 
-        if format is 'avi':
+        if format == 'avi':
             fourcc = cv2.VideoWriter_fourcc(*'XVID')
             mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
-        if format is 'divx':
+        if format == 'divx':
             #fourcc = cv.CV_FOURCC('D','I','V','X')
             fourcc = cv2.VideoWriter_fourcc(*'DIVX')
             mov_file = args.dir+suffix+'.avi'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
-        if format is 'mov':
+        if format == 'mov':
             #fourcc = cv.CV_FOURCC('D','I','V','X')
             fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
             mov_file = args.dir+suffix+'.mov'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
-        if format is 'mpg':
+        if format == 'mpg':
             #fourcc = cv.CV_FOURCC('M','J','P','G')
             #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
             fourcc = cv2.VideoWriter_fourcc('m', 'j', 'p', 'g') # note the lower case
             mov_file = args.dir+suffix+'.mpg'
             out = cv2.VideoWriter(mov_file,fourcc, fps, (width,height))
             
-        if format is 'mp4h':
+        if format == 'mp4h':
             #fourcc = cv.CV_FOURCC('M','J','P','G')
             #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
             
@@ -523,7 +524,7 @@ def main (argv):
             print('vvvvvvv')
             print(fourcc)
             
-        if format is 'mp4':
+        if format == 'mp4':
             #fourcc = cv.CV_FOURCC('M','J','P','G')
             #fourcc = cv2.VideoWriter_fourcc(*'MJPG')
             
