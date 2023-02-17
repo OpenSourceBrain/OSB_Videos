@@ -14,6 +14,8 @@ TARGET="c302Full"
 TARGET="c302FW"
 TARGET="c302Sibernetic"
 TARGET="NWBE"
+TARGET="NP8"
+TARGET="Human"
 
 
 BACKUP_DIR="backup/$TARGET-`date +%H_%M_%S-%y_%m_%d`"
