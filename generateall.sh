@@ -15,6 +15,7 @@ TARGET="c302FW"
 TARGET="c302Sibernetic"
 TARGET="NWBE"
 TARGET="NP8"
+TARGET="c302_Sib"
 TARGET="Human"
 
 

@@ -56,6 +56,7 @@ TRANSITION2 = 2.2 # internal intro slide
 INFO1 = 1.5 # internal intro slide
 INFO2 = 2.5 # internal intro slide
 INFO3 = 3.5 # internal intro slide
+INFO4 = 4.5 # internal intro slide
 
 
 HEADING_1 = "# "
@@ -114,6 +115,8 @@ def parse_seconds(sec_num):
         sec_num = INFO2
     elif sec_num=='INFO3':
         sec_num = INFO3
+    elif sec_num=='INFO4':
+        sec_num = INFO4
     duration = float(sec_num)
     
     return duration
@@ -208,7 +211,7 @@ def add_text(img, text, location, scale, font_colour):
         draw = ImageDraw.Draw(pil_im)  
         # use a truetype font  
         #font = ImageFont.truetype("arial.ttf", int(24*scale))
-        font = ImageFont.truetype("Arial Unicode.ttf", 15)
+        font = ImageFont.truetype("Arial Unicode.ttf", int(24*scale))
 
         y_offset = location[0]+i*30*scale
         x_offset = location[1]

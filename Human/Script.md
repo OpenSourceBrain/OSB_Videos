@@ -8,4 +8,6 @@ Video: human.avi 182-224
 Video: human.avi 242-268
 Video: human.avi 275-280  # load nml
 Video: human.avi 382-416  # view pyr cell & sim
-Video: human.avi 441-456
+
+Frame: human.avi 441 INFO4; Preliminary L2/3 microcircuit model with pyramidal cell and\nPV, SST, VIP interneurons
+Video: human.avi 441-455  # l23 net
